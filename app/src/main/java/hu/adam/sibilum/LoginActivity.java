@@ -1,5 +1,6 @@
 package hu.adam.sibilum;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,11 +36,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        startLogin();
+        startLogin(username);
     }
 
-    private void startLogin() {
+    private void startLogin(String username) {
 
+        if( ((App)getApplication()).getServer().login(username) ) {
+            startActivity(new Intent(this, ChannelsActivity.class));
+        } else
+            showText(R.string.error_login_failed);
+        
     }
 
     private String getUsername() {

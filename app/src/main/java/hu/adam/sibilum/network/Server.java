@@ -35,4 +35,8 @@ public class Server extends Thread {
     public void run() {
         super.run();
     }
+
+    public boolean login(String username) {
+        return false;
+    }
 }
