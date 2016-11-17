@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Sibilum</string>
+    <string name="label_username">Username:</string>
+    <string name="label_login">Login</string>
+    <string name="hint_username">Username</string>
+    <string name="error_empty_username_field">Empty username field!</string>
+    <string name="label_send">Send</string>
+    <string name="hint_write_a_message">Write a message...</string>
+</resources>
