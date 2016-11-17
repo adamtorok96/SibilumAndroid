@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(this, ChannelsActivity.class));
         } else
             showText(R.string.error_login_failed);
-        
+
     }
 
     private String getUsername() {

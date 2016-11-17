@@ -21,7 +21,7 @@ public class Server extends Thread {
         mSocket = new Socket();
 
         try {
-            mSocket.connect(mAddress);
+            mSocket.connect(mAddress, 3000);
 
             start();
 
