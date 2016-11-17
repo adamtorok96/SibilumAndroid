@@ -1,5 +1,6 @@
 package hu.adam.sibilum.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.adam.sibilum.ChannelActivity;
 import hu.adam.sibilum.R;
 import hu.adam.sibilum.network.Channel;
 
@@ -18,10 +20,14 @@ import hu.adam.sibilum.network.Channel;
 
 public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHolder> {
 
-    private List<Channel> mChannels;
+    private List<Channel> mChanels;
 
     public ChannelAdapter() {
-        mChannels = new ArrayList<>();
+        mChanels = new ArrayList<>();
+    }
+
+    public void setChannels(List<Channel> chanels) {
+        mChanels = chanels;
     }
 
     @Override
@@ -33,22 +39,34 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ChannelAdapter.ViewHolder holder, int position) {
-        holder.tvChannelName.setText(mChannels.get(position).getName());
+        holder.mChannel = mChanels.get(position);
+        holder.tvChannelName.setText(mChanels.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return mChannels.size();
+        return mChanels.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder{
 
+        private Channel mChannel;
         private TextView tvChannelName;
 
         ViewHolder(View view) {
             super(view);
 
             tvChannelName = (TextView)view.findViewById(R.id.tvChannelName);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), Channel.class);
+                    intent.putExtra(ChannelActivity.KEY_CHANNEL_ID, mChannel.getId());
+
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
 
     }

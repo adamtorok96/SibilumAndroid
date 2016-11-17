@@ -10,6 +10,8 @@ import hu.adam.sibilum.adapter.MessageAdapter;
 
 public class ChannelActivity extends AppCompatActivity {
 
+    public static final String KEY_CHANNEL_ID = "channel_id";
+
     private RecyclerView mRecyclerView;
     private MessageAdapter mAdapter;
 
