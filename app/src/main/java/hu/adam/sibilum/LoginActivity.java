@@ -41,11 +41,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void startLogin(String username) {
 
-        if( ((App)getApplication()).getServer().login(username) ) {
-            startActivity(new Intent(this, ChannelsActivity.class));
-        } else
-            showText(R.string.error_login_failed);
-
     }
 
     private String getUsername() {

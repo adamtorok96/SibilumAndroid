@@ -12,7 +12,7 @@ import java.util.List;
 
 import hu.adam.sibilum.ChannelActivity;
 import hu.adam.sibilum.R;
-import hu.adam.sibilum.network.Channel;
+import hu.adam.sibilum.models.Channel;
 
 /**
  * Created by adam on 2016.11.17..

@@ -1,4 +1,4 @@
-package hu.adam.sibilum.network;
+package hu.adam.sibilum.models;
 
 /**
  * Created by adam on 2016.11.17..
@@ -10,7 +10,8 @@ public class Channel {
     private String mName;
 
     public Channel(int id, String name) {
-        mName = name;
+        mId     = id;
+        mName   = name;
     }
 
     public int getId() {
