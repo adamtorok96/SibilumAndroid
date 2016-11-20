@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+import hu.adam.sibilum.inerfaces.OnLoginListener;
+import hu.adam.sibilum.models.User;
+import hu.adam.sibilum.network.Login;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnLoginListener {
 
     RelativeLayout mRlActivity;
     Button mBtnLogin;
@@ -40,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startLogin(String username) {
-
+        new Login(username, this).start();
     }
 
     private String getUsername() {
@@ -49,5 +54,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void showText(int resId) {
         Snackbar.make(mRlActivity, resId, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onLoginSuccess(int user, String username) {
+        App.get().setUser(new User(user, username));
+
+        Intent intent = new Intent(this, ChannelsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onLoginFail() {
+        showText(R.string.error_login_failed);
     }
 }

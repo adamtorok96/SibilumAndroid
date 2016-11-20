@@ -8,10 +8,10 @@ public class Server extends Thread {
 
     private static final int PORT = 9000;
 
-    private HttpServer mServer;
+    //private HttpServer mServer;
 
     public Server() {
-        mServer = new HttpServer();
+        //mServer = new HttpServer();
     }
 
     @Override
