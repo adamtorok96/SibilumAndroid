@@ -1,12 +1,19 @@
 package hu.adam.sibilum.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Date;
+
+import hu.adam.sibilum.Utils;
 
 /**
  * Created by adam on 2016.11.17..
  */
 
 public class Message {
+
+    private static final String[] sFields = {"id", "channel", "user", "message", "date"};
 
     private int mId;
     private int mChannel;
@@ -40,5 +47,23 @@ public class Message {
 
     public Date getDate() {
         return mDate;
+    }
+
+    public static Message fromJson(JSONObject json) {
+
+        if( !Utils.isValidModel(json, sFields) )
+            return null;
+
+        try {
+            return new Message(
+                    json.getInt("id"),
+                    json.getInt("channel"),
+                    json.getInt("user"),
+                    json.getString("message"),
+                    new Date(0)
+            );
+        } catch (JSONException e) {
+            return null;
+        }
     }
 }

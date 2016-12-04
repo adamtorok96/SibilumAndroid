@@ -1,10 +1,13 @@
 package hu.adam.sibilum.models;
 
-/**
- * Created by adam on 2016.11.17..
- */
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import hu.adam.sibilum.Utils;
 
 public class Channel {
+
+    private static final String[] sFields = {"id", "name"};
 
     private int mId;
     private String mName;
@@ -25,5 +28,20 @@ public class Channel {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Channel && ((Channel)obj).mId == mId;
+    }
+
+    public static Channel fromJson(JSONObject json) {
+
+        if( !Utils.isValidModel(json, sFields) )
+            return null;
+
+        try {
+            return new Channel(
+                    json.getInt("id"),
+                    json.getString("name")
+            );
+        } catch (JSONException e) {
+            return null;
+        }
     }
 }

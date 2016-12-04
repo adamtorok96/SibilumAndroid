@@ -1,18 +1,20 @@
 package hu.adam.sibilum;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 import hu.adam.sibilum.inerfaces.OnLoginListener;
 import hu.adam.sibilum.models.User;
-import hu.adam.sibilum.network.Login;
+import hu.adam.sibilum.network.ApiHelper;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnLoginListener {
 
@@ -34,10 +36,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        String username = getUsername();
+        String username = mEtUsername.getText().toString();
 
         if( username.isEmpty() ) {
-            showText(R.string.error_empty_username_field);
+            Utils.snackbar(mRlActivity, R.string.error_empty_username_field);
             return;
         }
 
@@ -45,16 +47,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startLogin(String username) {
-        new Login(username, this).start();
+        User user;
+
+        try {
+            user = ApiHelper.newUser(username, 1111);
+        } catch (IOException | JSONException e) {
+            Utils.snackbar(mRlActivity, R.string.error_login_failed);
+            return;
+        }
+
+        Utils.snackbar(mRlActivity, "asd");
     }
 
-    private String getUsername() {
-        return mEtUsername.getText().toString();
-    }
 
-    private void showText(int resId) {
-        Snackbar.make(mRlActivity, resId, Snackbar.LENGTH_LONG).show();
-    }
 
     @Override
     public void onLoginSuccess(int user, String username) {
@@ -66,6 +71,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onLoginFail() {
-        showText(R.string.error_login_failed);
+        Utils.snackbar(mRlActivity, R.string.error_login_failed);
     }
 }

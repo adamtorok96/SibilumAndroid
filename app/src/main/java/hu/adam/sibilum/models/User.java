@@ -1,10 +1,13 @@
 package hu.adam.sibilum.models;
 
-/**
- * Created by adam on 2016.11.17..
- */
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import hu.adam.sibilum.Utils;
 
 public class User {
+
+    private static final String[] sFields = {"id", "name"};
 
     private int mId;
     private String mName;
@@ -20,5 +23,20 @@ public class User {
 
     public String getName() {
         return mName;
+    }
+
+    public static User fromJson(JSONObject json) {
+
+        if( !Utils.isValidModel(json, sFields) )
+            return null;
+
+        try {
+            return new User(
+                    json.getInt("id"),
+                    json.getString("name")
+            );
+        } catch (JSONException e) {
+            return null;
+        }
     }
 }

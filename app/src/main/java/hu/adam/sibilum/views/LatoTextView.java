@@ -31,6 +31,7 @@ public class LatoTextView extends TextView {
     }
 
     private void Init() {
-        setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/lato.ttf"));
+        // setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/lato.ttf"));
+        // Todo: add asset to git
     }
 }
