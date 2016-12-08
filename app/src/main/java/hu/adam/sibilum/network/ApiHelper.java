@@ -14,6 +14,7 @@ import hu.adam.sibilum.models.User;
 
 public class ApiHelper {
 
+    /*
     public static User newUser(String name, int port) throws IOException, JSONException {
         return User.fromJson(new JSONObject(Api.newUser(name, port)));
     }
@@ -63,5 +64,5 @@ public class ApiHelper {
         }
 
         return messages;
-    }
+    } */
 }

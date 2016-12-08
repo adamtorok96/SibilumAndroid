@@ -1,6 +1,6 @@
 package hu.adam.sibilum.interfaces;
 
 public interface OnApiResult {
-    void onSuccess(String response);
-    void onFail();
+    void onSuccess(String api, String response);
+    void onFail(String api);
 }

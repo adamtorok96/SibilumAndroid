@@ -1,7 +1,11 @@
 package hu.adam.sibilum.models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import hu.adam.sibilum.Utils;
 
@@ -43,5 +47,15 @@ public class Channel {
         } catch (JSONException e) {
             return null;
         }
+    }
+
+    public static List<Channel> fromJsonArray(JSONArray array) throws JSONException {
+        List<Channel> channels = new ArrayList<>();
+
+        for(int i = 0; i < array.length(); i++) {
+            channels.add(Channel.fromJson(array.getJSONObject(i)));
+        }
+
+        return channels;
     }
 }

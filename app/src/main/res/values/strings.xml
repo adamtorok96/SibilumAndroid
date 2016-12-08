@@ -8,4 +8,6 @@
     <string name="hint_write_a_message">Write a message...</string>
     <string name="error_login_failed">Login failed</string>
     <string name="sibilum">Sibilum</string>
+    <string name="error_failed_to_download_channels">Failed to download channels!</string>
+    <string name="error_failed_to_download_messages">Failed to download messages!</string>
 </resources>

@@ -38,10 +38,10 @@ public class Api extends Thread {
             String response = Get(mApi, mParams);
 
             if( mOnApiResultListener != null )
-                mOnApiResultListener.onSuccess(response);
+                mOnApiResultListener.onSuccess(mApi, response);
         } catch (IOException e) {
             if( mOnApiResultListener != null )
-                mOnApiResultListener.onFail();
+                mOnApiResultListener.onFail(mApi);
         }
     }
 

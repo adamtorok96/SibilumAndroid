@@ -3,6 +3,7 @@ package hu.adam.sibilum;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,13 +11,11 @@ import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 
-import java.io.IOException;
-
-import hu.adam.sibilum.inerfaces.OnLoginListener;
+import hu.adam.sibilum.interfaces.OnApiResult;
 import hu.adam.sibilum.models.User;
-import hu.adam.sibilum.network.ApiHelper;
+import hu.adam.sibilum.network.api.NewUser;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnLoginListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnApiResult {
 
     RelativeLayout mRlActivity;
     Button mBtnLogin;
@@ -46,31 +45,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startLogin(username);
     }
 
+
     private void startLogin(String username) {
+        new NewUser(this, username, 111).start();
+    }
+
+    @Override
+    public void onSuccess(String api, String response) {
         User user;
 
         try {
-            user = ApiHelper.newUser(username, 1111);
-        } catch (IOException | JSONException e) {
+            user = User.fromString(response);
+        } catch (JSONException e) {
             Utils.snackbar(mRlActivity, R.string.error_login_failed);
             return;
         }
 
-        Utils.snackbar(mRlActivity, "asd");
-    }
-
-
-
-    @Override
-    public void onLoginSuccess(int user, String username) {
-        App.get().setUser(new User(user, username));
+        App.get().setUser(user);
 
         Intent intent = new Intent(this, ChannelsActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void onLoginFail() {
+    public void onFail(String api) {
         Utils.snackbar(mRlActivity, R.string.error_login_failed);
     }
 }

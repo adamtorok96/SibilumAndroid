@@ -1,9 +1,12 @@
 package hu.adam.sibilum.models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import hu.adam.sibilum.Utils;
 
@@ -65,5 +68,15 @@ public class Message {
         } catch (JSONException e) {
             return null;
         }
+    }
+
+    public static List<Message> fromJsonArray(JSONArray array) throws JSONException {
+        List<Message> messages = new ArrayList<>();
+
+        for(int i = 0; i < array.length(); i++) {
+            messages.add(Message.fromJson(array.getJSONObject(i)));
+        }
+
+        return messages;
     }
 }
