@@ -65,11 +65,19 @@ public class ChannelsActivity extends AppCompatActivity implements OnApiResult {
             return;
         }
 
-        mAdapter.setChannels(mChannels); // refresh list?
+        runOnUiThread(mUpdateAdapter);
     }
 
     @Override
     public void onFail(String api) {
         Utils.snackbar(mRecyclerView, R.string.error_failed_to_download_channels);
     }
+
+    public Runnable mUpdateAdapter = new Runnable() {
+        @Override
+        public void run() {
+            mAdapter.setChannels(mChannels);
+            mAdapter.notifyDataSetChanged();
+        }
+    };
 }

@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChannelsActivity" />
+        <activity android:name=".ChannelsActivity" android:label="@string/title_channels" />
         <activity android:name=".ChannelActivity" />
         <activity
             android:name=".SettingsActivity"

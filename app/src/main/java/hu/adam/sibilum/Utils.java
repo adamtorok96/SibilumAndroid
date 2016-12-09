@@ -19,7 +19,8 @@ public class Utils {
         }
 
         public static void error(Exception e) {
-            android.util.Log.e("DEBUG", e.getMessage());
+            if( e.getMessage()!= null )
+                android.util.Log.e("DEBUG", e.getMessage());
         }
 
         public static void info(String str) {

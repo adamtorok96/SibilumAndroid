@@ -58,7 +58,9 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), ChannelActivity.class);
+
                     intent.putExtra(ChannelActivity.KEY_CHANNEL_ID, mChannel.getId());
+                    intent.putExtra(ChannelActivity.KEY_CHANNEL_NAME, mChannel.getName());
 
                     view.getContext().startActivity(intent);
                 }
