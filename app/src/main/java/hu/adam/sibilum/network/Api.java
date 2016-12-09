@@ -3,6 +3,7 @@ package hu.adam.sibilum.network;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import hu.adam.sibilum.Utils;
 import hu.adam.sibilum.interfaces.OnApiResult;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -16,7 +17,7 @@ public class Api extends Thread {
     private static final int SERVER_PORT            = 9000;
 
     protected static final String API_USER_LIST       = "users";
-    protected static final String API_USER_NEW        = "users/new";
+    protected static final String API_USER_NEW        = "login";
     protected static final String API_CHANNEL_LIST    = "channels";
     protected static final String API_CHANNEL_NEW     = "channels/new";
     protected static final String API_MESSAGE_LIST    = "messages";
@@ -40,6 +41,8 @@ public class Api extends Thread {
             if( mOnApiResultListener != null )
                 mOnApiResultListener.onSuccess(mApi, response);
         } catch (IOException e) {
+            Utils.Log.error(e);
+
             if( mOnApiResultListener != null )
                 mOnApiResultListener.onFail(mApi);
         }

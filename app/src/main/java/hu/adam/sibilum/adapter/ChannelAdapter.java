@@ -14,10 +14,6 @@ import hu.adam.sibilum.ChannelActivity;
 import hu.adam.sibilum.R;
 import hu.adam.sibilum.models.Channel;
 
-/**
- * Created by adam on 2016.11.17..
- */
-
 public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHolder> {
 
     private List<Channel> mChanels;

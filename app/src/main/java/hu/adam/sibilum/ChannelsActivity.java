@@ -1,5 +1,6 @@
 package hu.adam.sibilum;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ public class ChannelsActivity extends AppCompatActivity implements OnApiResult {
 
     private RecyclerView mRecyclerView;
     private ChannelAdapter mAdapter;
+    private FloatingActionButton mFab;
 
     private List<Channel> mChannels;
 
@@ -30,6 +32,7 @@ public class ChannelsActivity extends AppCompatActivity implements OnApiResult {
         setContentView(R.layout.activity_channels);
 
         InitRecyclerView();
+        App.get().DownloadUsers();
         DownloadChannels();
     }
 
@@ -39,12 +42,15 @@ public class ChannelsActivity extends AppCompatActivity implements OnApiResult {
 
         mAdapter = new ChannelAdapter();
         mRecyclerView.setAdapter(mAdapter);
+
+        mFab = (FloatingActionButton)findViewById(R.id.fab_channels);
+        // TODO: create channel mFab.setOnClickListener();
     }
 
     private void DownloadChannels() {
         mChannels = new ArrayList<>();
 
-        new GetChannels(this);
+        new GetChannels(this).start();
     }
 
     @Override

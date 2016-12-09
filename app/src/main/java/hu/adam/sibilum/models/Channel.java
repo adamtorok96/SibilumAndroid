@@ -42,7 +42,7 @@ public class Channel {
         try {
             return new Channel(
                     json.getInt("id"),
-                    json.getString("name")
+                    Utils.fromUtf8(json.getString("name"))
             );
         } catch (JSONException e) {
             return null;

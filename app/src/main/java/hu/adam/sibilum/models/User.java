@@ -37,7 +37,7 @@ public class User {
         try {
             return new User(
                     json.getInt("id"),
-                    json.getString("name")
+                    Utils.fromUtf8(json.getString("name"))
             );
         } catch (JSONException e) {
             return null;

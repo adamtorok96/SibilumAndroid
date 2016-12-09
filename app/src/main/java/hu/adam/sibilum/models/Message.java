@@ -62,7 +62,7 @@ public class Message {
                     json.getInt("id"),
                     json.getInt("channel"),
                     json.getInt("user"),
-                    json.getString("message"),
+                    Utils.fromUtf8(json.getString("message")),
                     new Date(0)
             );
         } catch (JSONException e) {

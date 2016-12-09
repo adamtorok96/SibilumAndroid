@@ -13,10 +13,6 @@ import hu.adam.sibilum.models.User;
 import hu.adam.sibilum.network.Server;
 import hu.adam.sibilum.network.api.GetUsers;
 
-/**
- * Created by adam on 2016.11.17..
- */
-
 public class App extends Application implements OnApiResult {
 
     private static final String SERVER_HOST     = "rick.sch.bme.hu";
@@ -43,7 +39,7 @@ public class App extends Application implements OnApiResult {
     }
 
     public void DownloadUsers() {
-        new GetUsers(this);
+        new GetUsers(this).start();
     }
 
     public Server getServer() {

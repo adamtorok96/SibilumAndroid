@@ -31,6 +31,10 @@ public class ChannelActivity extends AppCompatActivity implements OnApiResult {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
 
+        if( getIntent().getExtras().getInt(KEY_CHANNEL_ID, 0) == 0 ) {
+            finish();
+        }
+
         InitRecyclerView();
         DownloadMessages();
     }
@@ -49,7 +53,7 @@ public class ChannelActivity extends AppCompatActivity implements OnApiResult {
     private void DownloadMessages() {
         mMessages = new ArrayList<>();
 
-        new GetMessages(this, 1);
+        new GetMessages(this, 1).start();
     }
 
     @Override
