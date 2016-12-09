@@ -16,14 +16,14 @@ import hu.adam.sibilum.models.Channel;
 
 public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHolder> {
 
-    private List<Channel> mChanels;
+    private List<Channel> mChannels;
 
     public ChannelAdapter() {
-        mChanels = new ArrayList<>();
+        mChannels = new ArrayList<>();
     }
 
-    public void setChannels(List<Channel> chanels) {
-        mChanels = chanels;
+    public void setChannels(List<Channel> channels) {
+        mChannels = channels;
     }
 
     @Override
@@ -35,13 +35,13 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ChannelAdapter.ViewHolder holder, int position) {
-        holder.mChannel = mChanels.get(position);
-        holder.tvChannelName.setText(mChanels.get(position).getName());
+        holder.mChannel = mChannels.get(position);
+        holder.tvChannelName.setText(mChannels.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return mChanels.size();
+        return mChannels.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -57,7 +57,7 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), Channel.class);
+                    Intent intent = new Intent(view.getContext(), ChannelActivity.class);
                     intent.putExtra(ChannelActivity.KEY_CHANNEL_ID, mChannel.getId());
 
                     view.getContext().startActivity(intent);

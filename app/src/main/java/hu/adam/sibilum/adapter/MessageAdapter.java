@@ -12,10 +12,6 @@ import java.util.List;
 import hu.adam.sibilum.R;
 import hu.adam.sibilum.models.Message;
 
-/**
- * Created by adam on 2016.11.17..
- */
-
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
     private List<Message> mMessages;

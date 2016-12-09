@@ -38,6 +38,8 @@ public class Api extends Thread {
         try {
             String response = Get(mApi, mParams);
 
+            Utils.Log.info("Response: "+ response);
+
             if( mOnApiResultListener != null )
                 mOnApiResultListener.onSuccess(mApi, response);
         } catch (IOException e) {

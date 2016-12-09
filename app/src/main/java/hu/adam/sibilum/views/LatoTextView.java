@@ -7,10 +7,6 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-/**
- * Created by adam on 2016.11.20..
- */
-
 public class LatoTextView extends TextView {
 
     public LatoTextView(Context context) {
@@ -31,7 +27,6 @@ public class LatoTextView extends TextView {
     }
 
     private void Init() {
-        // setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/lato.ttf"));
-        // Todo: add asset to git
+        setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/lato.ttf"));
     }
 }

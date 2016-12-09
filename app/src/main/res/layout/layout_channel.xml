@@ -8,6 +8,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvChannelName"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/bg_channel_item" />
+        android:background="@drawable/bg_channel_item"
+        android:text="channel"
+        android:textStyle="normal|bold"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/primary_text" />
 </LinearLayout>

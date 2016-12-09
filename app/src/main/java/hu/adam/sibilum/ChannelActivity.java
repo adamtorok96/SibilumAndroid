@@ -67,7 +67,7 @@ public class ChannelActivity extends AppCompatActivity implements OnApiResult {
             Utils.snackbar(mRecyclerView, R.string.error_failed_to_download_messages);
             return;
         }
-
+        Utils.Log.info("messages c: "+ mMessages.size());
         mAdapter.setMessages(mMessages);
     }
 
