@@ -39,4 +39,19 @@
     <string name="pref_title_server_address">Server\'s address</string>
     <string name="pref_title_server_port">Server\'s port</string>
     <string name="pref_header_server">Server</string>
+    <string name="pref_image_compression_level">Image compression</string>
+
+    <string-array name="pref_image_compression_text">
+        <item>Maximum compression</item>
+        <item>90%</item>
+        <item>80%</item>
+        <item>70%</item>
+        <item>60%</item>
+        <item>50%</item>
+        <item>40%</item>
+        <item>30%</item>
+        <item>20%</item>
+        <item>10%</item>
+        <item>No compression</item>
+    </string-array>
 </resources>

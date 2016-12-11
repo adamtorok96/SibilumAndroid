@@ -1,8 +1,8 @@
 package hu.adam.sibilum;
 
+import android.graphics.Bitmap;
 import android.os.Looper;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONObject;
@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.ByteBuffer;
 import java.util.Random;
 
 public class Utils {

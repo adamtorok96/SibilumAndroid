@@ -12,6 +12,7 @@
         android:key="server_port"
         android:title="@string/pref_title_server_port"
         android:singleLine="true"
-        android:inputType="number" />
+        android:inputType="number"
+        android:numeric="integer"/>
 
 </PreferenceScreen>

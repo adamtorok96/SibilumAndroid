@@ -36,13 +36,28 @@
             android:id="@+id/etMessage"
             android:layout_weight="1"
             android:hint="@string/hint_write_a_message"
-            android:imeOptions="actionSend"/>
+            android:imeOptions="actionSend" />
 
-        <Button
-            android:text="@string/label_send"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/btnSend"
-            android:layout_weight="1" />
+            android:layout_weight="3">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_camera"
+                android:id="@+id/btnCamera"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_send"
+                android:id="@+id/btnSend"
+                android:layout_weight="1" />
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

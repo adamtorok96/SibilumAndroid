@@ -1,10 +1,14 @@
 package hu.adam.sibilum.adapter;
 
+import android.annotation.TargetApi;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,20 +29,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     public void setMessages(List<Message> messages) {
-        mMessages   = messages;
+        mMessages = messages;
+    }
+
+    private boolean isNewAuthor(int position) {
+        return position == 0 || mMessages.get(position).getUser() != mMessages.get(position - 1).getUser();
     }
 
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_message, parent, false);
-
-        return new ViewHolder(view);
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_message, parent, false));
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        int gravity = mMessages.get(position).getUser() == App.get().getUser().getId() ? Gravity.END : Gravity.START;
-        int user    = mMessages.get(position).getUser();
+        Message message = mMessages.get(position);
+
+        int gravity = message.getUser() == App.get().getUser().getId() ? Gravity.END : Gravity.START;
+        int user    = message.getUser();
 
         if( isNewAuthor(position) ) {
             User author = App.get().getUserById(user);
@@ -50,12 +59,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.tvUser.setVisibility(View.VISIBLE);
         }
 
-        holder.tvMessage.setText(mMessages.get(position).getMessage());
-        holder.tvMessage.setGravity(gravity);
-    }
+        if( message.isText() ) {
+            holder.tvMessage.setText(mMessages.get(position).getMessage());
+            holder.tvMessage.setGravity(gravity);
+            holder.tvMessage.setVisibility(View.VISIBLE);
+        } else {
+            Bitmap bitmap = message.getBitmap();
 
-    private boolean isNewAuthor(int position) {
-        return position == 0 || mMessages.get(position).getUser() != mMessages.get(position - 1).getUser();
+            if( bitmap != null ) {
+                holder.ivImage.setImageBitmap(bitmap);
+                holder.ivImage.setScaleType(gravity == Gravity.START ? ImageView.ScaleType.FIT_START : ImageView.ScaleType.FIT_END);
+                holder.ivImage.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
@@ -67,12 +83,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         private TextView tvUser;
         private TextView tvMessage;
+        private ImageView ivImage;
 
         ViewHolder(View view) {
             super(view);
 
             tvUser      = (TextView)view.findViewById(R.id.tvUser);
             tvMessage   = (TextView)view.findViewById(R.id.tvMessage);
+            ivImage     = (ImageView)view.findViewById(R.id.ivImage);
         }
 
     }
