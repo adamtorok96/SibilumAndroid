@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="text|textAutoCorrect"
-            android:ems="15"
+            android:ems="13"
             android:id="@+id/etMessage"
             android:layout_weight="1"
             android:hint="@string/hint_write_a_message"

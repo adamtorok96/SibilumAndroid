@@ -1,8 +1,8 @@
 package hu.adam.sibilum.adapter;
 
-import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -41,12 +41,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_message, parent, false));
     }
 
-
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Message message = mMessages.get(position);
 
-        int gravity = message.getUser() == App.get().getUser().getId() ? Gravity.END : Gravity.START;
+        final int gravity = message.getUser() == App.get().getUser().getId() ? Gravity.END : Gravity.START;
         int user    = message.getUser();
 
         if( isNewAuthor(position) ) {
@@ -67,9 +66,28 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             Bitmap bitmap = message.getBitmap();
 
             if( bitmap != null ) {
+                final ImageView.ScaleType scaleType = gravity == Gravity.START
+                        ? ImageView.ScaleType.FIT_START
+                        : ImageView.ScaleType.FIT_END;
+
                 holder.ivImage.setImageBitmap(bitmap);
-                holder.ivImage.setScaleType(gravity == Gravity.START ? ImageView.ScaleType.FIT_START : ImageView.ScaleType.FIT_END);
+                holder.ivImage.setScaleType(scaleType);
                 holder.ivImage.setVisibility(View.VISIBLE);
+                holder.ivImage.setAdjustViewBounds(false);
+
+                holder.ivImage.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                    @Override
+                    public void onClick(View view) {
+                        if( holder.ivImage.getAdjustViewBounds() ) {
+                            holder.ivImage.setScaleType(scaleType);
+                            holder.ivImage.setAdjustViewBounds(false);;
+                        } else {
+                            holder.ivImage.setScaleType(ImageView.ScaleType.FIT_XY);
+                            holder.ivImage.setAdjustViewBounds(true);
+                        }
+                    }
+                });
             }
         }
     }
@@ -92,6 +110,5 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             tvMessage   = (TextView)view.findViewById(R.id.tvMessage);
             ivImage     = (ImageView)view.findViewById(R.id.ivImage);
         }
-
     }
 }

@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/LoginTheme">
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,15 +24,21 @@
         </activity>
         <activity
             android:name=".ChannelsActivity"
-            android:label="@string/title_activity_channels" />
+            android:label="@string/title_activity_channels"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ChannelActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait">
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".LoginActivity"/>
+            </activity>
 
         <service
             android:name=".network.Server"
-            android:exported="false"></service>
+            android:exported="false"/>
     </application>
 
 </manifest>
