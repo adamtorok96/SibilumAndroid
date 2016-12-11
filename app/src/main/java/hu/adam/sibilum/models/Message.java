@@ -70,6 +70,10 @@ public class Message {
         }
     }
 
+    public static Message fromString(String str) throws JSONException {
+        return Message.fromJson(new JSONObject(str));
+    }
+
     public static List<Message> fromJsonArray(JSONArray array) throws JSONException {
         List<Message> messages = new ArrayList<>();
 

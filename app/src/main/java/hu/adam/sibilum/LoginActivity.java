@@ -1,11 +1,14 @@
 package hu.adam.sibilum;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -19,6 +22,9 @@ import hu.adam.sibilum.network.api.NewUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnApiResult {
 
+    private static final String PREF_SAVE_USERNAME  = "save_username";
+    private static final String PREF_USERNAME       = "username";
+
     private RelativeLayout mRlActivity;
     private Button mBtnLogin;
     private EditText mEtUsername;
@@ -27,9 +33,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setFullscreen();
         setContentView(R.layout.activity_login);
 
         InitViews();
+    }
+
+    private void setFullscreen() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void InitViews() {
@@ -39,6 +51,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mProgressBar    = (ProgressBar)findViewById(R.id.progressBar);
 
         mBtnLogin.setOnClickListener(this);
+
+        mEtUsername.setText(getSavedUsername());
+    }
+
+    private String getSavedUsername() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+        return sp.getBoolean(PREF_SAVE_USERNAME, true) ? sp.getString(PREF_USERNAME, "") : "";
+    }
+
+    private void saveUsername(String username) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if( sp.getBoolean(PREF_SAVE_USERNAME, true) ) {
+            SharedPreferences.Editor edit = sp.edit();
+
+            edit.putString(PREF_USERNAME, username);
+
+            edit.apply();
+        }
     }
 
     @Override
@@ -50,46 +82,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        enableProgressBar();
+        runOnUiThread(mEnableProgressBar);
 
         startLogin(username);
     }
 
 
     private void startLogin(String username) {
-        new NewUser(this, username, 111).start();
-    }
+        saveUsername(username);
 
-    private void enableProgressBar() {
-        if( !Utils.isMainThread() ) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    enableProgressBar();
-                }
-            });
-
-            return;
-        }
-
-        mProgressBar.setVisibility(View.VISIBLE);
-        mBtnLogin.setEnabled(false);
-    }
-
-    private void disableProgressBar() {
-        if( !Utils.isMainThread() ) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    disableProgressBar();
-                }
-            });
-
-            return;
-        }
-
-        mProgressBar.setVisibility(View.GONE);
-        mBtnLogin.setEnabled(true);
+        new NewUser(this, username).start();
     }
 
     @Override
@@ -111,14 +113,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onSuccess(String api, String response) {
-        disableProgressBar();
+        runOnUiThread(mDisableProgressBar);
 
         User user;
 
         try {
             user = User.fromString(response);
         } catch (JSONException e) {
-            Utils.snackbar(mRlActivity, R.string.error_login_failed);
+            Utils.snackbar(mRlActivity, R.string.error_failed_to_login);
             return;
         }
 
@@ -130,8 +132,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onFail(String api) {
-        disableProgressBar();
+        runOnUiThread(mDisableProgressBar);
 
-        Utils.snackbar(mRlActivity, R.string.error_login_failed);
+        Utils.snackbar(mRlActivity, R.string.error_failed_to_login);
     }
+
+    public Runnable mEnableProgressBar = new Runnable() {
+        @Override
+        public void run() {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mBtnLogin.setEnabled(false);
+        }
+    };
+
+    public Runnable mDisableProgressBar = new Runnable() {
+        @Override
+        public void run() {
+            mProgressBar.setVisibility(View.GONE);
+            mBtnLogin.setEnabled(true);
+        }
+    };
 }

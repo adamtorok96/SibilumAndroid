@@ -49,6 +49,10 @@ public class Channel {
         }
     }
 
+    public static Channel fromString(String response) throws JSONException {
+        return Channel.fromJson(new JSONObject(response));
+    }
+
     public static List<Channel> fromJsonArray(JSONArray array) throws JSONException {
         List<Channel> channels = new ArrayList<>();
 

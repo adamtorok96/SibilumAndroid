@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="rick.sch.bme.hu"
+        android:key="server_address"
+        android:title="@string/pref_title_server_address"
+        android:singleLine="true"
+        android:inputType="text" />
+
+    <EditTextPreference
+        android:defaultValue="9000"
+        android:key="server_port"
+        android:title="@string/pref_title_server_port"
+        android:singleLine="true"
+        android:inputType="number" />
+
+</PreferenceScreen>

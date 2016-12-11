@@ -10,8 +10,11 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Random;
 
 public class Utils {
+
+    private static final Random sRandom = new Random();
 
     public static class Log {
         public static void error(String str) {
@@ -67,5 +70,9 @@ public class Utils {
 
     public static boolean isMainThread() {
         return Looper.myLooper() == Looper.getMainLooper();
+    }
+
+    public static int rand(int min, int max) {
+        return min + sRandom.nextInt(max - min);
     }
 }

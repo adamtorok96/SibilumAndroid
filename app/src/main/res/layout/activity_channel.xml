@@ -31,17 +31,18 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="text|textAutoCorrect"
             android:ems="15"
-            android:id="@+id/editText"
+            android:id="@+id/etMessage"
             android:layout_weight="1"
-            android:hint="@string/hint_write_a_message" />
+            android:hint="@string/hint_write_a_message"
+            android:imeOptions="actionSend"/>
 
         <Button
             android:text="@string/label_send"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/button"
+            android:id="@+id/btnSend"
             android:layout_weight="1" />
     </LinearLayout>
 </RelativeLayout>

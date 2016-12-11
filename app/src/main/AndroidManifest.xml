@@ -21,11 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChannelsActivity" android:label="@string/title_channels" />
+        <activity
+            android:name=".ChannelsActivity"
+            android:label="@string/title_activity_channels" />
         <activity android:name=".ChannelActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+
+        <service
+            android:name=".network.Server"
+            android:exported="false"></service>
     </application>
 
 </manifest>

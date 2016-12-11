@@ -19,8 +19,9 @@ public class App extends Application implements OnApiResult {
 
     private static App sApp = null;
 
+    private int mBroadcastPort;
+
     private User mUser;
-    private Server mServer;
 
     private List<User> mUsers;
 
@@ -34,16 +35,15 @@ public class App extends Application implements OnApiResult {
 
         sApp = this;
 
-        mServer = new Server();
+        mBroadcastPort = Utils.rand(49152, 65535);
+
         mUsers  = new ArrayList<>();
+
+        Server.start(this, mBroadcastPort);
     }
 
     public void DownloadUsers() {
         new GetUsers(this).start();
-    }
-
-    public Server getServer() {
-        return mServer;
     }
 
     public User getUser() {
@@ -54,8 +54,22 @@ public class App extends Application implements OnApiResult {
         return mUsers;
     }
 
+    public User getUserById(int id) {
+
+        for(User user : mUsers) {
+            if( user.getId() == id )
+                return user;
+        }
+
+        return null;
+    }
+
     public void setUser(User user) {
         mUser = user;
+    }
+
+    public int getBroadcastPort() {
+        return mBroadcastPort;
     }
 
     @Override

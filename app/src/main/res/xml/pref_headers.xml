@@ -5,4 +5,9 @@
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general" />
 
+    <header
+        android:fragment="hu.adam.sibilum.SettingsActivity$ServerPreferenceFragment"
+        android:icon="@drawable/ic_server"
+        android:title="@string/pref_header_server" />
+
 </preference-headers>
