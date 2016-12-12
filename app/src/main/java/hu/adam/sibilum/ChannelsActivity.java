@@ -19,7 +19,6 @@ import hu.adam.sibilum.interfaces.OnApiResult;
 import hu.adam.sibilum.models.Channel;
 import hu.adam.sibilum.network.Api;
 import hu.adam.sibilum.network.api.GetChannels;
-import hu.adam.sibilum.network.api.GetUsers;
 import hu.adam.sibilum.network.api.NewChannel;
 
 public class ChannelsActivity extends AppCompatActivity implements OnApiResult, View.OnClickListener {

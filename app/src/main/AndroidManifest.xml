@@ -26,7 +26,9 @@
             android:name=".ChannelsActivity"
             android:label="@string/title_activity_channels"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ChannelActivity" />
+        <activity
+            android:name=".ChannelActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
