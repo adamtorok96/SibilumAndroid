@@ -27,5 +27,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/ivImage"
         android:visibility="gone"
-        android:contentDescription="@string/content_description_image" />
+        android:contentDescription="@string/content_description_image"
+        android:layout_marginBottom="5dp"/>
 </LinearLayout>
