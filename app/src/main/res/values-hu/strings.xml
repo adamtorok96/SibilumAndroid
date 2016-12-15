@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sibilum</string>
+    <string name="btn_cancel">Mégse</string>
+    <string name="btn_create">Létrehozás</string>
+    <string name="channel_create_successfully">Sikeresen létrehozta a csatornát!</string>
+    <string name="content_description_image">Kép</string>
+    <string name="error_empty_username_field">Üres felhasználónév mező!</string>
+    <string name="error_failed_to_create_channel">Nem sikerült létrehozni a csatornát!</string>
+    <string name="error_failed_to_download_channels">Nem sikerült letölteni a csatornákat!</string>
+    <string name="error_failed_to_download_messages">Nem sikerült letölteni az üzeneteket!</string>
+    <string name="error_failed_to_login">Nem sikerült bejelentkezni!</string>
+    <string name="error_failed_to_send_message">Nem sikerült elküldeni az üzenetet!</string>
+    <string name="hint_channel_name">Csatorna neve</string>
+    <string name="hint_username">Felhasználónév</string>
+    <string name="hint_write_a_message">Írj egy üzentetet&#8230;</string>
+    <string name="label_login">Belépés</string>
+    <string name="label_send">Küldés</string>
+    <string name="label_username">Felhasználónév:</string>
+    <string name="menu_item_settings">Beállítások</string>
+    <string name="pref_description_save_username">Felhasználónév mentése a bejelenkező activity-ben</string>
+    <string name="pref_header_general">Általános</string>
+    <string name="pref_header_server">Szerver</string>
+    <string name="pref_image_compression_level">Kép tömörítés</string>
+    <string name="pref_title_save_username">Felhasználónév mentése</string>
+    <string name="pref_title_server_address">Szerver címe</string>
+    <string name="pref_title_server_port">Szerver portja</string>
+    <string name="sibilum"></string>
+    <string name="title_activity_channels">Csatornák</string>
+    <string name="title_activity_settings">Beállítások</string>
+    <string name="title_dialog_create_channel">Csatorna létrehozása</string>
+    <string name="unknown_author">Ismeretlen író!</string>
+</resources>
